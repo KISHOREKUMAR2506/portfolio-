@@ -4,35 +4,47 @@ import { FC } from 'react';
 import { FaGithub } from 'react-icons/fa';
 
 const Projects: FC = () => {
-  const projects = [
+  const projects: {
+    title: string;
+    description: string;
+    image: string;
+    tags: string[];
+    github: string;
+    category: string;
+    pptLink: string;
+  }[] = [
     {
       title: "Next-Generation SDN DDoS Mitigation",
-      description: "Developed a system to detect and mitigate DDoS attacks using SDN's centralized control. Applied the SVM machine learning algorithm to identify abnormal traffic patterns. Improved network reliability and response time against DDoS attacks.",
+      description:
+        "Developed a system to detect and mitigate DDoS attacks using SDN's centralized control. Applied the SVM machine learning algorithm to identify abnormal traffic patterns. Improved network reliability and response time against DDoS attacks.",
       image: "/projects/DDoS.jpg",
       tags: ["SDN", "Machine Learning", "SVM Algorithm", "Network Security"],
-      github: "https://github.com/KISHOREKUMAR2506/-Next-Generation-SDN-Solutions-for-DDoS-Detection-and-Mitigation",
+      github:
+        "https://github.com/KISHOREKUMAR2506/-Next-Generation-SDN-Solutions-for-DDoS-Detection-and-Mitigation",
       category: "Network Security",
-      pptLink: "/projects/DDoS.pdf"
+      pptLink: "/projects/DDoS.pdf",
     },
     {
       title: "AI-Based Railway Track Defect Detection",
-      description: "Designed a real-time railway track inspection system utilizing acoustic sensors for defect detection. Implemented the Isolation Forest algorithm to detect structural anomalies and crack formations. Integrated GPS for precise localization and automated cloud-based alerts to enhance predictive maintenance.",
+      description:
+        "Designed a real-time railway track inspection system utilizing acoustic sensors for defect detection. Implemented the Isolation Forest algorithm to detect structural anomalies and crack formations. Integrated GPS for precise localization and automated cloud-based alerts to enhance predictive maintenance.",
       image: "/projects/Rail_crack_detection.jpg",
       tags: ["Acoustic Sensors", "Isolation Forest", "GPS", "Cloud Integration"],
       github: "https://github.com/KISHOREKUMAR2506/RAIL_CRACK_DETECTION",
       category: "AI & IoT",
-      pptLink: "/projects/Rail_crack_detection.pdf"
+      pptLink: "/projects/Rail_crack_detection.pdf",
     },
     {
       title: "Personal Portfolio Website",
-      description: "Built a modern, responsive portfolio website using Next.js and Framer Motion for smooth animations and interactive UI. Optimized for fast performance, accessibility, and easy navigation across devices.",
-      image: "/projects/portfolio .jpg",
+      description:
+        "Built a modern, responsive portfolio website using Next.js and Framer Motion for smooth animations and interactive UI. Optimized for fast performance, accessibility, and easy navigation across devices.",
+      image: "/projects/portfolio.jpg", 
       tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
       github: "https://github.com/KISHOREKUMAR2506/portfolio-",
       category: "Web Development",
-      pptLink: "/projects/Portfolio-Presentation.pdf"
-    }
-  ] || []; // Ensuring projects array is never undefined
+      pptLink: "/projects/Portfolio-Presentation.pdf",
+    },
+  ]; 
 
   return (
     <section id ="projects" className="relative min-h-screen bg-[#090909] py-20 overflow-hidden">
