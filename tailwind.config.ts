@@ -30,6 +30,14 @@ export default {
       backgroundSize: {
         '300%': '300%',
       },
+      colors: {
+        'primary': '#64FFDA',
+      },
+      backdropFilter: {
+        'none': 'none',
+        'blur': 'blur(20px)',
+      },
     },
   },
+  plugins: [],
 } satisfies Config;
