@@ -32,62 +32,85 @@ const Hero: React.FC = () => {
   }, [mouseSpring.x, mouseSpring.y]);
 
   return (
-    <motion.section id="about"
+    <motion.section id ="about"
       className="relative min-h-screen flex items-center justify-center bg-[#090909] overflow-hidden"
       style={{ opacity, y }}
     >
       {/* Enhanced Dark Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-[#090909] via-[#121212] to-[#090909]" />
+        <motion.div 
+  className="absolute inset-0 opacity-[0.02]"
+  style={{
+    backgroundImage: `
+      linear-gradient(to right, #4F46E5 1px, transparent 1px),
+      linear-gradient(to bottom, #4F46E5 1px, transparent 1px)
+    `,
+    backgroundSize: '50px 50px',
+    transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`,
+  }}
+/>
+
       </div>
+
+      {/* Logo - Moved down and adjusted size */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className="absolute top-24 left-8 z-20"
+      >
+        <motion.div 
+          className="relative w-20 h-20 border-2 border-[#4F46E5] rounded-lg p-2"
+          whileHover={{ scale: 1.05 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        >
+          <Image
+            src="/logo.png"
+            alt="IKK Logo"
+            fill
+            className="object-contain"
+            priority
+          />
+        </motion.div>
+      </motion.div>
 
       {/* Main Content */}
       <div className="container mx-auto px-4 z-10">
         <div className="max-w-6xl mx-auto grid md:grid-cols-[1fr,1.5fr] gap-12 items-center">
-          
-          {/* Profile Image Column with Clickable Message */}
+          {/* Profile Image Column with Single Border */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            {/* Clickable Profile Image */}
-            <motion.div 
-              className="relative w-72 h-72 md:w-80 md:h-80 mx-auto md:mx-0 cursor-pointer"
-              onClick={() => setShowMessage(!showMessage)}
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-            >
-              {/* Image Wrapper */}
-              <div className="relative w-full h-full rounded-full border-[2px] border-[#4F46E5]">
-                <div className="absolute inset-[2px] rounded-full overflow-hidden">
-                  <Image
-                    src="/profile3.jpg"
-                    alt="Profile"
-                    fill
-                    className="object-cover"
-                    style={{
-                      filter: 'contrast(1.05) brightness(1.02) saturate(1.1)',
-                    }}
-                    priority
-                    sizes="(max-width: 768px) 288px, 320px"
-                  />
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Message Popup (Visible on Click) */}
-            {showMessage && (
-              <motion.p
-                className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-[#4F46E5] text-white px-3 py-1 rounded-lg shadow-md text-sm"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
+            {/* Main Profile Image with Single Clean Border */}
+            <div className="relative w-72 h-72 md:w-80 md:h-80 mx-auto md:mx-0">
+              {/* Main Container */}
+              <motion.div 
+                className="relative w-full h-full rounded-full border-[2px] border-[#4F46E5]"
+                whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
-                Eppd irukuu deyyy!!?? 👀🫣
-              </motion.p>
-            )}
+                {/* Image Container */}
+                <div className="absolute inset-[2px] rounded-full overflow-hidden">
+                  <div className="relative w-full h-full">
+                    <Image
+                      src="/profile3.jpg"
+                      alt="Profile"
+                      fill
+                      className="object-cover"
+                      style={{
+                        filter: 'contrast(1.05) brightness(1.02) saturate(1.1)',
+                      }}
+                      priority
+                      sizes="(max-width: 768px) 288px, 320px"
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
 
           {/* Content Column */}
@@ -149,8 +172,9 @@ const Hero: React.FC = () => {
               </motion.a>
 
               <div className="flex gap-4">
-                {[{ icon: FaGithub, url: "https://github.com/KISHOREKUMAR2506" },
-                  { icon: FaLinkedin, url: "https://www.linkedin.com/in/kishore-kumar-i-ece/" }
+                {[
+                  { icon: FaGithub, url: "https://github.com/KISHOREKUMAR2506" },
+                  { icon: FaLinkedin, url: "https://www.linkedin.com/in/kishore-kumar-i-ece/" },
                 ].map((social, index) => (
                   <motion.a
                     key={index}
