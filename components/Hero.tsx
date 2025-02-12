@@ -32,7 +32,7 @@ const Hero: React.FC = () => {
   }, [mouseSpring.x, mouseSpring.y]);
 
   return (
-    <motion.section id ="about"
+    <motion.section id ="home"
       className="relative min-h-screen flex items-center justify-center bg-[#090909] overflow-hidden"
       style={{ opacity, y }}
     >

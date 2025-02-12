@@ -32,7 +32,7 @@ const About: FC = () => {
   ];
 
   return (
-    <section className="relative min-h-screen bg-[#090909] py-20 overflow-hidden">
+    <section id ="about" className="relative min-h-screen bg-[#090909] py-20 overflow-hidden">
       {/* Spotlight Effect */}
       <motion.div
         className="absolute inset-0 pointer-events-none"

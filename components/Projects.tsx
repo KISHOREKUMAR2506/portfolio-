@@ -42,7 +42,7 @@ const Projects: FC = () => {
       tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
       github: "https://github.com/KISHOREKUMAR2506/portfolio-",
       category: "Web Development",
-      pptLink: "/projects/Portfolio-Presentation.pdf",
+      pptLink: "ikktech.vercel.app",
     },
   ]; 
 
