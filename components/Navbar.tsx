@@ -1,4 +1,3 @@
-"use client"
 import { AnimatePresence, motion } from 'framer-motion';
 import { Montserrat, Space_Grotesk } from 'next/font/google';
 import Link from 'next/link';

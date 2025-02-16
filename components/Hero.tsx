@@ -138,7 +138,7 @@ const Hero: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
-                AI & IoT Solutions Architect
+                IoT & Nxt - Gen Networking Enthusiast
               </motion.h2>
 
               <motion.p 
@@ -147,8 +147,9 @@ const Hero: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
               >
-                Specializing in crafting intelligent solutions that bridge the physical and digital worlds. 
-                Focused on developing innovative AI and IoT systems that drive technological advancement.
+              I specialize in IoT, Software-Defined Networking (SDN), and Cloud Integration, focusing on secure, scalable, and intelligent network solutions. 
+              Passionate about AI-driven connectivity, DDoS mitigation, and automation, I work on bridging the physical and digital worlds through innovative technology.
+
               </motion.p>
             </div>
 

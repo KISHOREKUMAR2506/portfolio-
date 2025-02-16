@@ -1,4 +1,3 @@
-"use client"
 import { motion, useInView } from 'framer-motion';
 import { FC, useRef, useState } from 'react';
 import { BiCodeAlt, BiData } from 'react-icons/bi';

@@ -1,5 +1,4 @@
 "use client";
-
 import { motion } from 'framer-motion';
 import { Montserrat, Poppins, Space_Grotesk } from 'next/font/google';
 import Link from 'next/link';
@@ -108,16 +107,16 @@ const Footer: React.FC = () => {
               <div className="flex flex-col h-full justify-between">
                 <div>
                   <Link href="#home" onClick={(e) => handleScroll(e, 'home')}>
-                    <motion.h2 
+                    <motion.h2
                       className={`text-4xl font-bold bg-gradient-to-r from-blue-400 via-blue-500 to-purple-500
-                               bg-clip-text text-transparent inline-block mb-3 ${spaceGrotesk.className}`}
+                              bg-clip-text text-transparent inline-block mb-3 ${spaceGrotesk.className}`}
                       whileHover={{ scale: 1.02 }}
                     >
                       Kishore Kumar
                     </motion.h2>
                   </Link>
                   <p className={`text-lg text-gray-400 leading-relaxed mb-4 ${montserrat.className}`}>
-                    Full Stack Developer & Software Engineer
+                  Effortless Innovation & Seamless Connectivity
                   </p>
                 </div>
                 

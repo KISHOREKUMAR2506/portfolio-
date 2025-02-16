@@ -1,5 +1,4 @@
-"use client";
-
+"use client"
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -86,5 +85,4 @@ const LoadingScreen = ({ onComplete = () => {} }) => {
     </div>
   );
 };
-
 export default LoadingScreen;
