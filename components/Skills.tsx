@@ -8,9 +8,9 @@ import { SiCisco, SiCplusplus, SiJavascript, SiNextdotjs, SiTailwindcss } from '
 import { TbCircuitCapacitor } from 'react-icons/tb';
 
 const Skills: FC = () => {
+  const [activeSection, setActiveSection] = useState(0);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
-  const [activeSection, setActiveSection] = useState(0);
 
   const skillSections = [
     {
@@ -61,14 +61,6 @@ const Skills: FC = () => {
     { title: "Best Student Volunteer Award", description: "IETE (2023 & 2024)", icon: <FaUserGraduate className="text-3xl mr-4 text-green-500" /> }
   ];
 
-  const nextSection = () => {
-    setActiveSection((prev) => (prev + 1) % skillSections.length);
-  };
-
-  const prevSection = () => {
-    setActiveSection((prev) => (prev - 1 + skillSections.length) % skillSections.length);
-  };
-
   return (
     <motion.section 
       id="skills"
@@ -117,8 +109,8 @@ const Skills: FC = () => {
           />
         </motion.div>
 
-        {/* Skills Carousel */}
-        <div className="overflow-hidden relative backdrop-blur-sm bg-[#1a1a1a]/30 rounded-2xl border border-[#4F46E5]/20 p-8">
+        {/* Skills Carousel with Improved Responsiveness */}
+        <div className="overflow-hidden relative backdrop-blur-sm bg-[#1a1a1a]/30 rounded-2xl border border-[#4F46E5]/20 p-4 sm:p-8">
           <motion.div 
             className="flex"
             animate={{ x: `-${activeSection * 100}%` }}
@@ -134,11 +126,12 @@ const Skills: FC = () => {
                 >
                   <div className="flex items-center justify-center gap-3 mb-6">
                     <div className="h-[2px] w-12 bg-[#4F46E5]" />
-                    <h4 className="text-2xl font-bold text-white">{section.title}</h4>
+                    <h4 className="text-xl sm:text-2xl font-bold text-white">{section.title}</h4>
                     <div className="h-[2px] w-12 bg-[#4F46E5]" />
                   </div>
 
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  {/* Improved Grid Layout */}
+                  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
                     {section.skills.map((skill, skillIndex) => (
                       <motion.div
                         key={skill.name}
@@ -148,15 +141,20 @@ const Skills: FC = () => {
                         whileHover={{ scale: 1.05 }}
                         className="group relative"
                       >
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#4F46E5]/20 to-transparent rounded-xl blur-xl group-hover:opacity-100 opacity-0 transition-opacity duration-300" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#4F46E5]/20 to-transparent 
+                          rounded-xl blur-xl group-hover:opacity-100 opacity-0 transition-opacity duration-300" 
+                        />
                         <motion.div
-                          className="relative p-6 rounded-xl bg-[#1a1a1a] border border-[#4F46E5]/20 hover:border-[#4F46E5]/40
-                            backdrop-blur-sm transition-all duration-300"
+                          className="relative p-4 sm:p-6 rounded-xl bg-[#1a1a1a] border border-[#4F46E5]/20 
+                            hover:border-[#4F46E5]/40 backdrop-blur-sm transition-all duration-300
+                            flex flex-col items-center justify-center h-full"
                           whileHover={{ y: -5 }}
                         >
-                          <div className="flex flex-col items-center gap-4">
-                            {skill.icon}
-                            <span className="text-lg text-gray-300 font-medium">
+                          <div className="flex flex-col items-center gap-3 sm:gap-4">
+                            <div className="text-4xl sm:text-6xl">
+                              {skill.icon}
+                            </div>
+                            <span className="text-sm sm:text-lg text-gray-300 font-medium text-center">
                               {skill.name}
                             </span>
                           </div>
@@ -170,36 +168,38 @@ const Skills: FC = () => {
           </motion.div>
 
           {/* Navigation Buttons */}
-          <motion.button
-            onClick={prevSection}
-            className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-[#1a1a1a] border border-[#4F46E5]/20 text-white
-              hover:bg-[#4F46E5]/20 transition-colors duration-300"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <MdArrowBackIos className="text-2xl" />
-          </motion.button>
+          <div className="flex justify-between absolute top-1/2 -translate-y-1/2 left-2 right-2 sm:left-4 sm:right-4">
+            <motion.button
+              onClick={() => setActiveSection((prev) => (prev - 1 + skillSections.length) % skillSections.length)}
+              className="p-2 sm:p-3 rounded-full bg-[#1a1a1a] border border-[#4F46E5]/20 text-white
+                hover:bg-[#4F46E5]/20 transition-colors duration-300"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <MdArrowBackIos className="text-xl sm:text-2xl" />
+            </motion.button>
 
-          <motion.button
-            onClick={nextSection}
-            className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-[#1a1a1a] border border-[#4F46E5]/20 text-white
-              hover:bg-[#4F46E5]/20 transition-colors duration-300"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <MdArrowForwardIos className="text-2xl" />
-          </motion.button>
+            <motion.button
+              onClick={() => setActiveSection((prev) => (prev + 1) % skillSections.length)}
+              className="p-2 sm:p-3 rounded-full bg-[#1a1a1a] border border-[#4F46E5]/20 text-white
+                hover:bg-[#4F46E5]/20 transition-colors duration-300"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <MdArrowForwardIos className="text-xl sm:text-2xl" />
+            </motion.button>
+          </div>
         </div>
 
-        {/* Achievements Section */}
+        {/* Achievements Section with Improved Responsiveness */}
         <motion.div 
           className="mt-20"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h3 className="text-3xl font-bold text-center text-white mb-12">Achievements</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <h3 className="text-2xl sm:text-3xl font-bold text-center text-white mb-12">Achievements</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             {achievements.map((achievement, index) => (
               <motion.div
                 key={index}
@@ -208,17 +208,19 @@ const Skills: FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-[#4F46E5]/20 to-transparent rounded-xl blur-xl group-hover:opacity-100 opacity-0 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#4F46E5]/20 to-transparent 
+                  rounded-xl blur-xl group-hover:opacity-100 opacity-0 transition-opacity duration-300" 
+                />
                 <motion.div
-                  className="relative p-6 rounded-xl bg-[#1a1a1a] border border-[#4F46E5]/20 hover:border-[#4F46E5]/40
-                    backdrop-blur-sm transition-all duration-300"
+                  className="relative p-4 sm:p-6 rounded-xl bg-[#1a1a1a] border border-[#4F46E5]/20 
+                    hover:border-[#4F46E5]/40 backdrop-blur-sm transition-all duration-300"
                   whileHover={{ y: -5 }}
                 >
                   <div className="flex items-center gap-4 mb-4">
                     {achievement.icon}
-                    <h4 className="text-xl font-bold text-white">{achievement.title}</h4>
+                    <h4 className="text-lg sm:text-xl font-bold text-white">{achievement.title}</h4>
                   </div>
-                  <p className="text-gray-400">{achievement.description}</p>
+                  <p className="text-sm sm:text-base text-gray-400">{achievement.description}</p>
                 </motion.div>
               </motion.div>
             ))}
