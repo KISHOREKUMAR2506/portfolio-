@@ -1,159 +1,177 @@
 "use client"
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { FaArrowRight, FaFileDownload, FaGithub, FaLinkedin } from 'react-icons/fa';
 
-const Hero: React.FC = () => {
+const Hero: FC = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const { scrollYProgress } = useScroll();
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const y = useTransform(scrollYProgress, [0, 0.2], [0, -50]);
-  const [showMessage, setShowMessage] = useState(false);
   
-  const springConfig = { stiffness: 150, damping: 15, mass: 0.1 };
-  const mouseSpring = {
-    x: useSpring(0, springConfig),
-    y: useSpring(0, springConfig),
-  };
-
+  // Parallax Effects
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
       const centerX = window.innerWidth / 2;
       const centerY = window.innerHeight / 2;
-      mouseSpring.x.set((clientX - centerX) * 0.1);
-      mouseSpring.y.set((clientY - centerY) * 0.1);
-      setMousePosition({ x: clientX, y: clientY });
+      setMousePosition({ 
+        x: (clientX - centerX) * 0.05,
+        y: (clientY - centerY) * 0.05
+      });
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [mouseSpring.x, mouseSpring.y]);
+  }, []);
 
   return (
-    <motion.section id ="home"
+    <motion.section id="home"
       className="relative min-h-screen flex items-center justify-center bg-[#090909] overflow-hidden"
-      style={{ opacity, y }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
     >
-      {/* Enhanced Dark Background */}
+      {/* Enhanced Technical Background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#090909] via-[#121212] to-[#090909]" />
+        {/* Circuit Grid */}
+        <div className="absolute inset-0 circuit-pattern opacity-[0.03]" 
+          style={{
+            transform: `translate(${mousePosition.x * 0.5}px, ${mousePosition.y * 0.5}px)`,
+          }}
+        />
+        
+        {/* Animated Gradient */}
         <motion.div 
-  className="absolute inset-0 opacity-[0.02]"
-  style={{
-    backgroundImage: `
-      linear-gradient(to right, #4F46E5 1px, transparent 1px),
-      linear-gradient(to bottom, #4F46E5 1px, transparent 1px)
-    `,
-    backgroundSize: '50px 50px',
-    transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`,
-  }}
-/>
+          className="absolute inset-0 bg-gradient-to-br from-[#090909] via-[#121212] to-[#090909]"
+          animate={{
+            background: [
+              'radial-gradient(circle at 0% 0%, #4F46E5 0%, transparent 50%)',
+              'radial-gradient(circle at 100% 100%, #4F46E5 0%, transparent 50%)',
+              'radial-gradient(circle at 0% 100%, #4F46E5 0%, transparent 50%)',
+              'radial-gradient(circle at 100% 0%, #4F46E5 0%, transparent 50%)',
+            ]
+          }}
+          transition={{ duration: 10, repeat: Infinity }}
+          style={{ opacity: 0.1 }}
+        />
 
+        {/* Technical Grid */}
+        <div className="absolute inset-0 bg-grid opacity-[0.05]" />
       </div>
 
-      {/* Logo - Moved down and adjusted size */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="absolute top-24 left-8 z-20"
-      >
-        <motion.div 
-          className="relative w-20 h-20 border-2 border-[#4F46E5] rounded-lg p-2"
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
-        >
-          <Image
-            src="/logo.png"
-            alt="IKK Logo"
-            fill
-            className="object-contain"
-            priority
-          />
-        </motion.div>
-      </motion.div>
-
-      {/* Main Content */}
       <div className="container mx-auto px-4 z-10">
         <div className="max-w-6xl mx-auto grid md:grid-cols-[1fr,1.5fr] gap-12 items-center">
-          {/* Profile Image Column with Single Border */}
+          {/* Profile Image with Enhanced Technical Frame */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            {/* Main Profile Image with Single Clean Border */}
             <div className="relative w-72 h-72 md:w-80 md:h-80 mx-auto md:mx-0">
-              {/* Main Container */}
+              {/* Rotating Border Effect */}
+              <motion.div
+                className="absolute inset-0 rounded-full"
+                style={{
+                  background: 'linear-gradient(90deg, #4F46E5, transparent)',
+                  opacity: 0.3,
+                }}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+              />
+              
               <motion.div 
-                className="relative w-full h-full rounded-full border-[2px] border-[#4F46E5]"
+                className="relative w-full h-full rounded-full border-4 border-[#4F46E5] tech-card overflow-hidden"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
-                {/* Image Container */}
+                {/* Glowing Effect */}
+                <motion.div
+                  className="absolute inset-0 bg-[#4F46E5]"
+                  animate={{ opacity: [0.1, 0.2, 0.1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+                
                 <div className="absolute inset-[2px] rounded-full overflow-hidden">
-                  <div className="relative w-full h-full">
-                    <Image
-                      src="/profile3.jpg"
-                      alt="Profile"
-                      fill
-                      className="object-cover"
-                      style={{
-                        filter: 'contrast(1.05) brightness(1.02) saturate(1.1)',
-                      }}
-                      priority
-                      sizes="(max-width: 768px) 288px, 320px"
-                    />
-                  </div>
+                  <Image
+                    src="/profile3.jpg"
+                    alt="Profile"
+                    fill
+                    className="object-cover border-4 border-blue-500"
+                    priority
+                  />
                 </div>
               </motion.div>
             </div>
           </motion.div>
 
-          {/* Content Column */}
+          {/* Content with Enhanced Terminal Style */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             className="text-left space-y-8"
           >
-            <div className="space-y-4">
+            <div className="terminal p-6 rounded-lg relative overflow-hidden">
+              {/* Terminal Header */}
+              <div className="flex items-center gap-2 mb-4 border-b border-[#4F46E5]/20 pb-2">
+                <div className="w-3 h-3 rounded-full bg-red-500" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                <div className="w-3 h-3 rounded-full bg-green-500" />
+                <span className="ml-2 text-sm text-gray-400 font-mono">profile.exe</span>
+              </div>
+
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                <span className="text-[#4F46E5] font-mono text-lg">Hello, I'm</span>
-                <h1 className="text-5xl md:text-6xl font-bold text-[#E5E7EB] mt-2 tracking-tight">
-                  Kishore Kumar 
-                </h1>
+                <span className="text-[#4F46E5] font-mono text-lg">&gt; initiating_profile.sh</span>
+                <motion.h1 
+                  className="text-5xl md:text-6xl font-bold text-[#E5E7EB] mt-2 tracking-tight relative"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <span className="relative z-10">Kishore Kumar</span>
+                  {/* Subtle glow effect behind the text */}
+                  <motion.div
+                    className="absolute inset-0 bg-[#4F46E5] blur-2xl rounded-full"
+                    animate={{ 
+                      opacity: [0.1, 0.15, 0.1],
+                    }}
+                    transition={{ 
+                      duration: 2, 
+                      repeat: Infinity,
+                      ease: "linear" 
+                    }}
+                    style={{ zIndex: 0 }}
+                  />
+                </motion.h1>
               </motion.div>
-              
-              <motion.h2 
-                className="text-2xl md:text-3xl text-[#4F46E5] font-medium"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-              >
-                IoT & Nxt - Gen Networking Enthusiast
-              </motion.h2>
 
-              <motion.p 
-                className="text-[#9CA3AF] text-lg leading-relaxed max-w-2xl"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+              <motion.div 
+                className="code-block mt-4 p-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
               >
-              I specialize in IoT, Software-Defined Networking (SDN), and Cloud Integration, focusing on secure, scalable, and intelligent network solutions. 
-              Passionate about AI-driven connectivity, DDoS mitigation, and automation, I work on bridging the physical and digital worlds through innovative technology.
-
-              </motion.p>
+                <div className="font-mono text-sm">
+                  <span className="text-purple-400">const</span>{" "}
+                  <span className="text-blue-400">profile</span> = {"{"}
+                  <br />
+                  &nbsp;&nbsp;role: <span className="text-green-400">"IoT & Nxt-Gen Networking"</span>,
+                  <br />
+                  &nbsp;&nbsp;expertise: [<span className="text-yellow-300">"SDN"</span>, <span className="text-yellow-300">"Cloud"</span>, <span className="text-yellow-300">"IoT"</span> <span className="text-yellow-300">"Fullstack Developer"</span> ],
+                  <br />
+                  &nbsp;&nbsp;status: <span className="text-green-400">"Ready for Innovation"</span>
+                  <br />
+                  {"}"};
+                </div>
+              </motion.div>
             </div>
 
-            {/* Actions */}
+            {/* Enhanced Action Buttons */}
             <motion.div
               className="flex items-center gap-6"
               initial={{ opacity: 0, y: 20 }}
@@ -162,8 +180,8 @@ const Hero: React.FC = () => {
             >
               <motion.a
                 href="/resume.pdf"
-                className="group px-6 py-3 bg-[#4F46E5] text-white rounded-lg flex items-center gap-2 hover:bg-[#4338CA] transition-all shadow-lg shadow-[#4F46E5]/20"
-                whileHover={{ scale: 1.05 }}
+                className="tech-card group px-6 py-3 text-white rounded-lg flex items-center gap-2"
+                whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(79, 70, 229, 0.3)" }}
                 whileTap={{ scale: 0.95 }}
                 target="_blank"
               >
@@ -180,8 +198,11 @@ const Hero: React.FC = () => {
                   <motion.a
                     key={index}
                     href={social.url}
-                    className="text-[#9CA3AF] hover:text-[#4F46E5] text-2xl p-2 hover:bg-[#4F46E5]/10 rounded-lg transition-all"
-                    whileHover={{ scale: 1.1 }}
+                    className="tech-card text-[#9CA3AF] hover:text-[#4F46E5] text-2xl p-2 rounded-lg"
+                    whileHover={{ 
+                      scale: 1.1,
+                      boxShadow: "0 0 20px rgba(79, 70, 229, 0.3)",
+                    }}
                     transition={{ type: "spring", stiffness: 300, damping: 10 }}
                     target="_blank"
                     rel="noopener noreferrer"

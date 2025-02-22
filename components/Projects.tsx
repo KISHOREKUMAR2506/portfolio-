@@ -1,7 +1,7 @@
-
 import { motion } from 'framer-motion';
 import { FC } from 'react';
 import { FaGithub } from 'react-icons/fa';
+import { HiOutlineCode } from 'react-icons/hi';
 
 const Projects: FC = () => {
   const projects: {
@@ -57,10 +57,17 @@ const Projects: FC = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-7xl font-bold mb-6 text-white">Projects</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            Showcasing my journey through various technologies and solutions. Each project represents a unique challenge and a skill to grow.
-          </p>
+          <div className="flex items-center justify-center gap-2 mb-4 relative">
+            <HiOutlineCode className="text-[#4F46E5] text-4xl" />
+            <h2 className="text-4xl md:text-7xl font-bold text-white">Projects</h2>
+            <motion.div
+              className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 h-1 bg-[#4F46E5] rounded-full"
+              initial={{ width: "0%" }}
+              whileInView={{ width: "20%" }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            />
+          </div>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">

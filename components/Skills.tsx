@@ -70,16 +70,55 @@ const Skills: FC = () => {
   };
 
   return (
-    <motion.section id = "skills"
+    <motion.section 
+      id="skills"
       ref={ref} 
       className="py-20 bg-[#090909] relative overflow-hidden min-h-screen"
-      initial={{ scale: 0.8, opacity: 0 }}
-      animate={isInView ? { scale: 1, opacity: 1 } : {}}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      initial={{ opacity: 0 }}
+      animate={isInView ? { opacity: 1 } : {}}
+      transition={{ duration: 0.8 }}
     >
-      <div className="container mx-auto px-4">
-        <h3 className="text-4xl font-bold text-center text-white mb-8"> Technical Skills & Achievements</h3>
-        <div className="overflow-hidden relative">
+      {/* Technical Background */}
+      <div className="absolute inset-0">
+        <motion.div 
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: 'linear-gradient(#4F46E5 1px, transparent 1px), linear-gradient(to right, #4F46E5 1px, transparent 1px)',
+            backgroundSize: '40px 40px'
+          }}
+          animate={{
+            backgroundPosition: ['0px 0px', '40px 40px'],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Section Header */}
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <h3 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            Technical Skills & Achievements
+          </h3>
+          <motion.div
+            className="h-1 w-24 bg-[#4F46E5] mx-auto"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          />
+        </motion.div>
+
+        {/* Skills Carousel */}
+        <div className="overflow-hidden relative backdrop-blur-sm bg-[#1a1a1a]/30 rounded-2xl border border-[#4F46E5]/20 p-8">
           <motion.div 
             className="flex"
             animate={{ x: `-${activeSection * 100}%` }}
@@ -87,77 +126,104 @@ const Skills: FC = () => {
           >
             {skillSections.map((section, index) => (
               <div key={index} className="w-full flex-shrink-0">
-                <div className="text-center mb-8">
-                  <h4 className="text-2xl font-bold text-white mb-4">{section.title}</h4>
-                  <motion.div 
-                    className={`h-1 w-32 mx-auto bg-gradient-to-r ${section.color}`}
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: 1 }}
-                    transition={{ duration: 0.5 }}
-                  />
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 justify-items-center mt-4">
+                <motion.div 
+                  className="text-center mb-8"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <div className="flex items-center justify-center gap-3 mb-6">
+                    <div className="h-[2px] w-12 bg-[#4F46E5]" />
+                    <h4 className="text-2xl font-bold text-white">{section.title}</h4>
+                    <div className="h-[2px] w-12 bg-[#4F46E5]" />
+                  </div>
+
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                     {section.skills.map((skill, skillIndex) => (
                       <motion.div
                         key={skill.name}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: skillIndex * 0.1, duration: 0.5 }}
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        className="group flex flex-col items-center gap-4 w-full"
+                        transition={{ delay: skillIndex * 0.1 }}
+                        whileHover={{ scale: 1.05 }}
+                        className="group relative"
                       >
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#4F46E5]/20 to-transparent rounded-xl blur-xl group-hover:opacity-100 opacity-0 transition-opacity duration-300" />
                         <motion.div
-                          className="p-8 bg-white/5 rounded-2xl hover:bg-white/10 
-                            w-full flex justify-center
-                            hover:shadow-lg hover:shadow-current/20 group-hover:border-current/20
-                            border border-transparent"
-                          whileHover={{ scale: 1.1 }}
-                          transition={{ type: "tween", duration: 0.3, ease: "easeInOut" }}
+                          className="relative p-6 rounded-xl bg-[#1a1a1a] border border-[#4F46E5]/20 hover:border-[#4F46E5]/40
+                            backdrop-blur-sm transition-all duration-300"
+                          whileHover={{ y: -5 }}
                         >
-                          {skill.icon}
+                          <div className="flex flex-col items-center gap-4">
+                            {skill.icon}
+                            <span className="text-lg text-gray-300 font-medium">
+                              {skill.name}
+                            </span>
+                          </div>
                         </motion.div>
-                        <span className="text-lg text-gray-300 text-center font-semibold group-hover:text-white">
-                          {skill.name}
-                        </span>
                       </motion.div>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               </div>
             ))}
           </motion.div>
-          <div className="absolute inset-y-0 left-0 flex items-center">
-            <button onClick={prevSection} className="p-3 bg-gray-800 text-white rounded-full shadow-md hover:bg-gray-700 transition-colors">
-              <MdArrowBackIos className="text-2xl" />
-            </button>
-          </div>
-          <div className="absolute inset-y-0 right-0 flex items-center">
-            <button onClick={nextSection} className="p-3 bg-gray-800 text-white rounded-full shadow-md hover:bg-gray-700 transition-colors">
-              <MdArrowForwardIos className="text-2xl" />
-            </button>
-          </div>
+
+          {/* Navigation Buttons */}
+          <motion.button
+            onClick={prevSection}
+            className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-[#1a1a1a] border border-[#4F46E5]/20 text-white
+              hover:bg-[#4F46E5]/20 transition-colors duration-300"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <MdArrowBackIos className="text-2xl" />
+          </motion.button>
+
+          <motion.button
+            onClick={nextSection}
+            className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-[#1a1a1a] border border-[#4F46E5]/20 text-white
+              hover:bg-[#4F46E5]/20 transition-colors duration-300"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <MdArrowForwardIos className="text-2xl" />
+          </motion.button>
         </div>
 
         {/* Achievements Section */}
-        <div className="mt-20">
-          <h3 className="text-3xl font-bold text-center text-white mb-8">Achievements</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-4">
+        <motion.div 
+          className="mt-20"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <h3 className="text-3xl font-bold text-center text-white mb-12">Achievements</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {achievements.map((achievement, index) => (
               <motion.div
                 key={index}
-                className="p-6 border-2 border-gray-700 text-white rounded-lg shadow-lg transform transition-transform hover:scale-105 hover:border-blue-500"
+                className="relative group"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
+                transition={{ delay: index * 0.1 }}
               >
-                <div className="flex items-center mb-4">
-                  {achievement.icon}
-                  <h4 className="text-xl font-bold whitespace-nowrap">{achievement.title}</h4>
-                </div>
-                <p className="text-sm">{achievement.description}</p>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#4F46E5]/20 to-transparent rounded-xl blur-xl group-hover:opacity-100 opacity-0 transition-opacity duration-300" />
+                <motion.div
+                  className="relative p-6 rounded-xl bg-[#1a1a1a] border border-[#4F46E5]/20 hover:border-[#4F46E5]/40
+                    backdrop-blur-sm transition-all duration-300"
+                  whileHover={{ y: -5 }}
+                >
+                  <div className="flex items-center gap-4 mb-4">
+                    {achievement.icon}
+                    <h4 className="text-xl font-bold text-white">{achievement.title}</h4>
+                  </div>
+                  <p className="text-gray-400">{achievement.description}</p>
+                </motion.div>
               </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </motion.section>
   );
