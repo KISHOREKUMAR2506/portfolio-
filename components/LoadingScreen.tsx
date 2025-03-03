@@ -22,7 +22,7 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
         transition={{ duration: 1.5, delay: 2.5 }}
       >
         <motion.div
-          className="relative w-20 h-20 flex justify-center items-center"
+          className="relative w-28 h-28 flex justify-center items-center"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
@@ -32,15 +32,15 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
             style={{ borderTopColor: "transparent" }}
           ></motion.div>
           <motion.div
-            className="absolute w-14 h-14 border-4 border-gray-500 rounded-full animate-spin"
+            className="absolute w-16 h-16 border-4 border-gray-500 rounded-full animate-spin"
             style={{ borderTopColor: "transparent", animationDuration: "1.5s" }}
           ></motion.div>
           <Image
             src="/loading.jpg"
             alt="Logo"
             className="absolute"
-            width={65} // Set a fixed width
-            height={65} // Set a fixed height
+            width={90} // Set a fixed width
+            height={90} // Set a fixed height
             priority
           />
         </motion.div>
