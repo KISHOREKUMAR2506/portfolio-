@@ -1,202 +1,166 @@
 "use client";
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Montserrat, Space_Grotesk } from 'next/font/google';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
 import { FC } from 'react';
 import { BiLogoGmail } from 'react-icons/bi';
-import { FaGithub, FaLinkedin, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaCode, FaGithub, FaLinkedin, FaMapMarkerAlt } from 'react-icons/fa';
 import { SiLeetcode } from 'react-icons/si';
 
-const montserrat = Montserrat({ subsets: ['latin'] });
-const spaceGrotesk = Space_Grotesk({ subsets: ['latin'] });
-
 const Footer: FC = () => {
-  const { scrollYProgress } = useScroll();
-  const opacity = useTransform(scrollYProgress, [0.8, 1], [0, 1]);
+  const socialLinks = [
+    {
+      name: 'GitHub',
+      url: 'https://github.com/KISHOREKUMAR2506',
+      icon: FaGithub,
+      color: 'hover:text-white',
+      bgHover: 'hover:bg-gray-800/30'
+    },
+    {
+      name: 'LinkedIn',
+      url: 'https://www.linkedin.com/in/kishore-kumar-i-ece/',
+      icon: FaLinkedin,
+      color: 'hover:text-blue-400',
+      bgHover: 'hover:bg-blue-900/30'
+    },
+   
+    {
+      name: 'Email',
+      url: 'mailto:i.kishorekumar.ece@gmail.com',
+      icon: BiLogoGmail,
+      color: 'hover:text-red-400',
+      bgHover: 'hover:bg-red-900/30'
+    },
+    {
+      name: 'LeetCode',
+      url: 'https://leetcode.com/u/KishoreKumar_I/',
+      icon: SiLeetcode,
+      color: 'hover:text-yellow-400',
+      bgHover: 'hover:bg-yellow-900/30'
+    }
+  ];
 
   return (
-    <motion.footer 
-      className="relative bg-gradient-to-b from-[#090909] to-black text-white"
-      style={{ opacity }}
-    >
-      {/* Decorative Top Border */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#4F46E5] to-transparent" />
+    <footer className="relative py-20 mt-32">
+      {/* Top Gradient Divider */}
+      <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#4F46E5] to-transparent opacity-20" />
 
-      {/* Main Content */}
-      <div className="container mx-auto px-6 py-20">
+      <div className="container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
-          {/* Content Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-16">
-            {/* Brand Section */}
+          {/* Main Content */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-16">
+            {/* Brand Section - Left Column */}
             <div className="md:col-span-5">
-              <Link href="#home">
-                <div className="flex items-center gap-4 mb-6 group">
-                  {/* Custom Logo Container */}
-                  <motion.div
-                    className="relative bg-[#1a1a1a] p-3 rounded-xl border border-[#4F46E5]/20
-                      overflow-hidden group-hover:border-[#4F46E5]/40 transition-all duration-300"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    {/* Animated Background */}
-                    <motion.div
-                      className="absolute inset-0 opacity-20"
-                      animate={{
-                        background: [
-                          'radial-gradient(circle at 50% 50%, #4F46E5, transparent)',
-                          'radial-gradient(circle at 0% 100%, #4F46E5, transparent)',
-                          'radial-gradient(circle at 100% 0%, #4F46E5, transparent)',
-                        ]
-                      }}
-                      transition={{ duration: 4, repeat: Infinity }}
-                    />
-                    
-                    {/* Your Custom Logo */}
-                    <div className="relative w-12 h-12">
+              <motion.div 
+                className="space-y-6"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                {/* Logo and Name */}
+                <div className="flex items-start gap-6">
+                  <div className="relative group">
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-[#4F46E5] to-[#8B5CF6] 
+                      rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-300 blur">
+                    </div>
+                    <div className="relative">
                       <Image
-                        src="/logo.png"  // Make sure to put your logo file in the public folder
-                        alt="IKK Logo"
-                        fill
-                        className="object-contain"
+                        src="/loading.jpg"
+                        alt="Kishore Kumar"
+                        width={70}
+                        height={70}
+                        className="rounded-full border-2 border-[#4F46E5]/20 bg-[#1a1a1a]"
                       />
                     </div>
-                  </motion.div>
-
-                  {/* Name with Enhanced Styling */}
-                  <div>
-                    <h2 className={`text-4xl font-bold relative group-hover:scale-105 
-                      transition-transform duration-300 ${spaceGrotesk.className}`}>
-                      <span className="bg-gradient-to-r from-[#4F46E5] via-blue-500 to-purple-500
+                  </div>
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="text-3xl font-bold bg-gradient-to-r from-[#4F46E5] via-[#06B6D4] to-[#8B5CF6] 
                         bg-clip-text text-transparent">
                         Kishore Kumar
-                      </span>
-                      <motion.span
-                        className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r 
-                          from-[#4F46E5] via-blue-500 to-purple-500"
-                        initial={{ scaleX: 0 }}
-                        whileHover={{ scaleX: 1 }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    </h2>
+                      </h3>
+                      <p className="text-base text-gray-400 mt-2">
+                        Effortless Innovation & Seamless Connectivity
+                      </p>
+                    </div>
+
+                    {/* Location */}
+                    <motion.div
+                      className="flex items-center gap-3 text-gray-400"
+                      whileHover={{ x: 8 }}
+                    >
+                      <FaMapMarkerAlt className="text-2xl text-blue-400" />
+                      <span>Chennai, India</span>
+                    </motion.div>
                   </div>
                 </div>
-              </Link>
-              <p className={`text-gray-400 text-lg mb-6 ${montserrat.className}`}>
-                Effortless Innovation & Seamless Connectivity
-              </p>
+              </motion.div>
             </div>
 
-            {/* Navigation Links */}
-            <div className="md:col-span-3">
-              <h3 className={`text-xl font-semibold text-white mb-6 ${spaceGrotesk.className}`}>
-                Navigation
-              </h3>
-              <div className="space-y-4">
-                {['Home', 'About', 'Projects', 'Skills', 'Contact'].map((item) => (
-                  <motion.a
-                    key={item}
-                    href={`#${item.toLowerCase()}`}
-                    className="block text-base text-gray-400 hover:text-white transition-all duration-300 w-fit"
-                    whileHover={{ x: 8 }}
-                  >
-                    <span className="relative group">
-                      {item}
-                      <span className="absolute left-0 bottom-0 w-0 h-[1px] bg-[#4F46E5] 
-                        group-hover:w-full transition-all duration-300" />
-                    </span>
-                  </motion.a>
-                ))}
-              </div>
-            </div>
-
-            {/* Contact & Connect Section */}
-            <div className="md:col-span-4 space-y-8">
-              {/* Contact Info */}
-              <div>
-                <h3 className={`text-xl font-semibold text-white mb-6 ${spaceGrotesk.className}`}>
-                  Contact
-                </h3>
-                <div className="space-y-4">
-                  <motion.a
-                    href="mailto:i.kishorekumar.ece@gmail.com"
-                    className="block group"
-                    whileHover={{ x: 8 }}
-                  >
-                    <div className="flex items-center gap-3 text-gray-400 group-hover:text-white transition-colors duration-300">
-                      <BiLogoGmail className="text-xl text-red-400" />
-                      <span className="text-base">i.kishorekumar.ece@gmail.com</span>
-                    </div>
-                  </motion.a>
-                  <motion.div
-                    className="flex items-center gap-3 text-gray-400"
-                    whileHover={{ x: 8 }}
-                  >
-                    <FaMapMarkerAlt className="text-xl text-blue-400" />
-                    <span className="text-base">Chennai, India</span>
-                  </motion.div>
+            {/* Connect Section - Right Column */}
+            <div className="md:col-span-7 flex items-center">
+              <motion.div
+                className="w-full relative"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                {/* Floating Title */}
+                <div className="absolute -top-3 left-4 px-2 bg-[#090909] z-10">
+                  <span className="text-xl font-medium bg-gradient-to-r from-[#4F46E5] via-[#06B6D4] to-[#8B5CF6] 
+                    bg-clip-text text-transparent">
+                    Let's Connect
+                  </span>
                 </div>
-              </div>
 
-              {/* Connect Section */}
-              <div>
-                <h3 className={`text-xl font-semibold text-white mb-6 ${spaceGrotesk.className}`}>
-                  Connect
-                </h3>
-                <div className="flex gap-4">
-                  {[
-                    { icon: <FaGithub />, href: 'https://github.com/KISHOREKUMAR2506', color: 'hover:text-white', bg: 'hover:bg-gray-800/30' },
-                    { icon: <FaLinkedin />, href: 'https://www.linkedin.com/in/kishore-kumar-i-ece/', color: 'hover:text-blue-400', bg: 'hover:bg-blue-900/30' },
-                    { icon: <BiLogoGmail />, href: 'mailto:i.kishorekumar.ece@gmail.com', color: 'hover:text-red-400', bg: 'hover:bg-red-900/30' },
-                    { icon: <SiLeetcode />, href: 'https://leetcode.com/u/KishoreKumar_I/', color: 'hover:text-yellow-400', bg: 'hover:bg-yellow-900/30' }
-                  ].map((link, index) => (
-                    <motion.a
-                      key={index}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`p-3 text-2xl text-gray-400 ${link.color} ${link.bg}
-                        bg-[#1a1a1a] rounded-xl border border-[#4F46E5]/20
-                        transition-all duration-300 hover:border-[#4F46E5]/40
-                        hover:scale-110`}
-                      whileHover={{ y: -4 }}
-                      style={{
-                        width: '50px',
-                        height: '50px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                    >
-                      {link.icon}
-                    </motion.a>
-                  ))}
+                {/* Social Links Container */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-[#1a1a1a]/30 backdrop-blur-sm 
+                  rounded-xl p-8 border border-[#4F46E5]/20">
+                  {socialLinks.map((link, index) => {
+                    const Icon = link.icon;
+                    return (
+                      <motion.a
+                        key={link.name}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`p-4 text-2xl text-gray-400 ${link.color} ${link.bgHover}
+                          bg-[#1a1a1a] rounded-xl border border-[#4F46E5]/20
+                          transition-all duration-300 hover:border-[#4F46E5]/40
+                          flex items-center justify-center hover:scale-110 mx-auto`}
+                        whileHover={{ y: -4 }}
+                        style={{
+                          width: '60px',
+                          height: '60px'
+                        }}
+                      >
+                        <Icon />
+                      </motion.a>
+                    );
+                  })}
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
 
-          {/* Copyright Section */}
-          <div className="relative mt-16 pt-8">
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r 
-              from-transparent via-[#4F46E5]/20 to-transparent" />
-            <motion.div
-              className="text-center"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-            >
-              <p className={`text-gray-400 text-base ${montserrat.className}`}>
-                © {new Date().getFullYear()} Kishore Kumar | All rights reserved
-              </p>
-            </motion.div>
-          </div>
+          {/* Bottom Section */}
+          <motion.div 
+            className="pt-8 border-t border-[#4F46E5]/20 text-base text-gray-400
+              flex flex-col md:flex-row justify-between items-center gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
+            <p>© 2025 Kishore Kumar. All rights reserved.</p>
+            <div className="flex items-center gap-3">
+              <FaCode className="text-xl text-[#4F46E5]" />
+              <span>Crafted with love and sprinkle of techies❤️✨</span>
+            </div>
+          </motion.div>
         </div>
       </div>
-
-      {/* Decorative Bottom Border */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r 
-        from-transparent via-[#4F46E5] to-transparent" />
-    </motion.footer>
+    </footer>
   );
 };
 

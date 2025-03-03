@@ -1,13 +1,48 @@
 "use client"
-import { motion, useScroll } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { gsap } from 'gsap';
 import Image from 'next/image';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { FaArrowRight, FaFileDownload, FaGithub, FaLinkedin } from 'react-icons/fa';
 
 const Hero: FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const { scrollYProgress } = useScroll();
-  
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Animated text reveal
+      gsap.from(".hero-text-char", {
+        y: 100,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.03,
+        ease: "power4.out"
+      });
+
+      // Profile image animation
+      gsap.from(".profile-image", {
+        scale: 0.8,
+        opacity: 0,
+        duration: 1.5,
+        ease: "elastic.out(1, 0.3)"
+      });
+
+      // Terminal window animation
+      gsap.from(".terminal", {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        delay: 0.5,
+        ease: "power3.out"
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   // Parallax Effects
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -24,68 +59,101 @@ const Hero: FC = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  return (
-    <motion.section id="home"
-      className="relative min-h-screen flex items-center justify-center bg-[#090909] overflow-hidden"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
+  // Split text for animation - fixed easing
+  const heroText = "Kishore Kumar".split("").map((char, i) => (
+    <motion.span
+      key={i}
+      className="hero-text-char inline-block"
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ 
+        delay: i * 0.03, 
+        duration: 1, 
+        ease: "easeOut" // Changed from custom cubic-bezier to standard easing
+      }}
     >
-      {/* Enhanced Technical Background */}
+      {char === " " ? "\u00A0" : char}
+    </motion.span>
+  ));
+
+  return (
+    <motion.section 
+      ref={containerRef}
+      id="home"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{ y }}
+    >
+      {/* Advanced Background Effects */}
       <div className="absolute inset-0">
-        {/* Circuit Grid */}
-        <div className="absolute inset-0 circuit-pattern opacity-[0.03]" 
-          style={{
-            transform: `translate(${mousePosition.x * 0.5}px, ${mousePosition.y * 0.5}px)`,
-          }}
-        />
-        
-        {/* Animated Gradient */}
+        {/* Animated Grid */}
         <motion.div 
-          className="absolute inset-0 bg-gradient-to-br from-[#090909] via-[#121212] to-[#090909]"
-          animate={{
-            background: [
-              'radial-gradient(circle at 0% 0%, #4F46E5 0%, transparent 50%)',
-              'radial-gradient(circle at 100% 100%, #4F46E5 0%, transparent 50%)',
-              'radial-gradient(circle at 0% 100%, #4F46E5 0%, transparent 50%)',
-              'radial-gradient(circle at 100% 0%, #4F46E5 0%, transparent 50%)',
-            ]
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(90deg, rgba(79, 70, 229, 0.1) 1px, transparent 1px),
+              linear-gradient(rgba(79, 70, 229, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
           }}
-          transition={{ duration: 10, repeat: Infinity }}
-          style={{ opacity: 0.1 }}
+          animate={{
+            backgroundPosition: ['0px 0px', '50px 50px']
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         />
 
-        {/* Technical Grid */}
-        <div className="absolute inset-0 bg-grid opacity-[0.05]" />
+        {/* Floating Particles */}
+        {Array.from({ length: 30 }).map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-[#4F46E5] rounded-full"
+            initial={{
+              x: Math.random() * window.innerWidth,
+              y: Math.random() * window.innerHeight,
+            }}
+            animate={{
+              y: ['-100%', '100%'],
+              x: [
+                Math.random() * window.innerWidth - 50,
+                Math.random() * window.innerWidth + 50
+              ],
+            }}
+            transition={{
+              duration: Math.random() * 10 + 10,
+              repeat: Infinity,
+              ease: "linear",
+              delay: Math.random() * -10,
+            }}
+          />
+        ))}
       </div>
 
       <div className="container mx-auto px-4 z-10">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-[1fr,1.5fr] gap-12 items-center">
-          {/* Profile Image with Enhanced Technical Frame */}
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          {/* Profile Section */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1 }}
             className="relative"
           >
             <div className="relative w-72 h-72 md:w-80 md:h-80 mx-auto md:mx-0">
-              {/* Rotating Border Effect */}
+              {/* Glowing Effect */}
               <motion.div
                 className="absolute inset-0 rounded-full"
                 style={{
-                  background: 'linear-gradient(90deg, #4F46E5, transparent)',
+                  background: 'conic-gradient(from 0deg, #4F46E5, transparent, #4F46E5)',
                   opacity: 0.3,
                 }}
                 animate={{ rotate: 360 }}
                 transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
               />
               
+              {/* Image Container */}
               <motion.div 
-                className="relative w-full h-full rounded-full border-4 border-[#4F46E5] tech-card overflow-hidden"
-                whileHover={{ scale: 1.02 }}
+                className="relative w-full h-full rounded-full border-4 border-[#4F46E5] overflow-hidden"
+                whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
               >
-                {/* Glowing Effect */}
                 <motion.div
                   className="absolute inset-0 bg-[#4F46E5]"
                   animate={{ opacity: [0.1, 0.2, 0.1] }}
@@ -97,7 +165,7 @@ const Hero: FC = () => {
                     src="/profile3.jpg"
                     alt="Profile"
                     fill
-                    className="object-cover border-4 border-blue-500"
+                    className="object-cover"
                     priority
                   />
                 </div>
@@ -105,14 +173,14 @@ const Hero: FC = () => {
             </div>
           </motion.div>
 
-          {/* Content with Enhanced Terminal Style */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-left space-y-8"
-          >
-            <div className="terminal p-6 rounded-lg relative overflow-hidden">
+          {/* Content Section */}
+          <div className="text-left space-y-8">
+            <motion.div 
+              className="terminal p-6 rounded-lg relative overflow-hidden"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
               {/* Terminal Header */}
               <div className="flex items-center gap-2 mb-4 border-b border-[#4F46E5]/20 pb-2">
                 <div className="w-3 h-3 rounded-full bg-red-500" />
@@ -121,67 +189,73 @@ const Hero: FC = () => {
                 <span className="ml-2 text-sm text-gray-400 font-mono">profile.exe</span>
               </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-              >
-                <span className="text-[#4F46E5] font-mono text-lg">&gt; initiating_profile.sh</span>
+              {/* Content */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-2">
+                  <span className="text-[#4F46E5] font-mono">&gt;</span>
+                  <motion.span 
+                    className="text-green-400 font-mono"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                  >
+                    initiating_profile.sh
+                  </motion.span>
+                </div>
+
                 <motion.h1 
-                  className="text-5xl md:text-6xl font-bold text-[#E5E7EB] mt-2 tracking-tight relative"
+                  className="text-4xl md:text-6xl font-bold"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
+                  transition={{ delay: 0.7 }}
                 >
-                  <span className="relative z-10">Kishore Kumar</span>
-                  {/* Subtle glow effect behind the text */}
-                  <motion.div
-                    className="absolute inset-0 bg-[#4F46E5] blur-2xl rounded-full"
-                    animate={{ 
-                      opacity: [0.1, 0.15, 0.1],
-                    }}
-                    transition={{ 
-                      duration: 2, 
-                      repeat: Infinity,
-                      ease: "linear" 
-                    }}
-                    style={{ zIndex: 0 }}
-                  />
+                  <span className="bg-gradient-to-r from-[#4F46E5] via-blue-500 to-purple-500
+                    bg-clip-text text-transparent">
+                    Kishore Kumar
+                  </span>
                 </motion.h1>
-              </motion.div>
 
-              <motion.div 
-                className="code-block mt-4 p-4"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-              >
-                <div className="font-mono text-sm">
-                  <span className="text-purple-400">const</span>{" "}
-                  <span className="text-blue-400">profile</span> = {"{"}
-                  <br />
-                  &nbsp;&nbsp;role: <span className="text-green-400">"IoT & Nxt-Gen Networking"</span>,
-                  <br />
-                  &nbsp;&nbsp;expertise: [<span className="text-yellow-300">"SDN"</span>, <span className="text-yellow-300">"Cloud"</span>, <span className="text-yellow-300">"IoT"</span> <span className="text-yellow-300">"Fullstack Developer"</span> ],
-                  <br />
-                  &nbsp;&nbsp;status: <span className="text-green-400">"Ready for Innovation"</span>
-                  <br />
-                  {"}"};
-                </div>
-              </motion.div>
-            </div>
+                <motion.div 
+                  className="font-mono text-sm space-y-2"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.9 }}
+                >
+                  <div>
+                    <span className="text-purple-400">const</span>{" "}
+                    <span className="text-blue-400">profile</span> = {"{"}
+                  </div>
+                  <div className="pl-4">
+                    role: <span className="text-green-400">"IoT & Nxt-Gen Networking"</span>,
+                  </div>
+                  <div className="pl-4">
+                    expertise: [
+                    <span className="text-yellow-300">"SDN"</span>,{" "}
+                    <span className="text-yellow-300">"Cloud"</span>,{" "}
+                    <span className="text-yellow-300">"IoT"</span>,{" "}
+                    <span className="text-yellow-300">"Fullstack"</span>
+                    ],
+                  </div>
+                  <div className="pl-4">
+                    status: <span className="text-green-400">"Ready for Innovation"</span>
+                  </div>
+                  <div>{"}"}</div>
+                </motion.div>
+              </div>
+            </motion.div>
 
-            {/* Enhanced Action Buttons */}
+            {/* Action Buttons */}
             <motion.div
               className="flex items-center gap-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 1.1 }}
             >
               <motion.a
                 href="/resume.pdf"
-                className="tech-card group px-6 py-3 text-white rounded-lg flex items-center gap-2"
-                whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(79, 70, 229, 0.3)" }}
+                className="group px-6 py-3 bg-[#4F46E5] text-white rounded-lg flex items-center gap-2
+                  hover:bg-[#4F46E5]/90 transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 target="_blank"
               >
@@ -198,12 +272,11 @@ const Hero: FC = () => {
                   <motion.a
                     key={index}
                     href={social.url}
-                    className="tech-card text-[#9CA3AF] hover:text-[#4F46E5] text-2xl p-2 rounded-lg"
-                    whileHover={{ 
-                      scale: 1.1,
-                      boxShadow: "0 0 20px rgba(79, 70, 229, 0.3)",
-                    }}
-                    transition={{ type: "spring", stiffness: 300, damping: 10 }}
+                    className="text-[#9CA3AF] hover:text-[#4F46E5] text-2xl p-3 rounded-lg
+                      bg-[#1a1a1a]/80 border border-[#4F46E5]/20 hover:border-[#4F46E5]/40
+                      transition-all duration-300"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -212,7 +285,7 @@ const Hero: FC = () => {
                 ))}
               </div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </motion.section>
