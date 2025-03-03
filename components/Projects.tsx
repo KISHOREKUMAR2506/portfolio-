@@ -12,14 +12,15 @@ const Projects: FC = () => {
 
   const projects = [
     {
-      title: "Smart Home Automation System",
-      description: "Developed an IoT-based smart home automation system using ESP32 microcontrollers and MQTT protocol. Implemented features for remote control of lights, appliances, and security systems through a mobile app. Integrated voice control using Alexa and real-time monitoring with cloud-based data analytics.",
-      image: "/projects/smart-home.jpg",
-      tags: ["IoT", "ESP32", "MQTT", "Cloud Computing", "Mobile App"],
-      github: "https://github.com/KISHOREKUMAR2506/smart-home-automation",
-      pptLink: "/projects/smart-home.pdf",
-      category: "IoT & Automation",
+      title: "UnDebt – AI-Powered Debt Management Web App",
+      description: "Built a smart financial management system to track and optimize debt repayment strategies. Integrated a repayment calculator with Snowball and Avalanche methods for personalized debt clearance plans.",
+      image: "/projects/undebt.jpg", // Update with actual image if available
+      tags: ["AI", "Finance", "Debt Management", "Web App"],
+      github: "https://github.com/KISHOREKUMAR2506/undebt", // Update if applicable
+      pptLink: "/projects/undebt.pdf",
+      category: "AI & FinTech",
     },
+    
     {
       title: "Next-Generation SDN DDoS Mitigation",
       description: "Developed a system to detect and mitigate DDoS attacks using SDN's centralized control. Applied the SVM machine learning algorithm to identify abnormal traffic patterns.",

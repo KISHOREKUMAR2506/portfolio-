@@ -149,7 +149,7 @@ const About: FC = () => {
               >
                 <div className="flex items-center gap-3 mb-6">
                   <div className="h-1 w-12 bg-[#4F46E5]" />
-                  <h3 className="text-xl text-[#4F46E5] font-mono">About Me</h3>
+                  <h3 className="text-xl text-[#4F46E5] font-mono">Who am I?</h3>
                 </div>
 
                 <motion.p 

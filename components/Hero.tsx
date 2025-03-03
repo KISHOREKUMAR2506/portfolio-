@@ -166,7 +166,7 @@ const Hero = () => {
         >
           <motion.a 
             href="/Kishore_resume.pdf"
-           className="flex items-center gap-3 px-6 py-3 rounded-lg bg-[#4F46E5] 
+            className="flex items-center gap-3 px-6 py-3 rounded-lg bg-[#4F46E5] 
                           text-white hover:bg-[#4F46E5]/90 transition-all duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
