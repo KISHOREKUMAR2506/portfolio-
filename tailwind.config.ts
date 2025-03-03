@@ -12,6 +12,7 @@ export default {
         gradient: 'gradient 8s linear infinite',
         float: 'float 6s ease-in-out infinite',
         'shine': 'shine 1.5s linear infinite',
+        'spin-slow': 'spin 8s linear infinite',
       },
       keyframes: {
         gradient: {
@@ -36,6 +37,10 @@ export default {
       backdropFilter: {
         'none': 'none',
         'blur': 'blur(20px)',
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
     },
   },

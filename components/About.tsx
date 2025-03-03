@@ -153,7 +153,7 @@ const About: FC = () => {
                 </div>
 
                 <motion.p 
-                  className="text-gray-300 leading-relaxed text-lg"
+                  className="text-gray-300 leading-relaxed text-lg text-justify"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}

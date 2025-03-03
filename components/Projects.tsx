@@ -12,6 +12,15 @@ const Projects: FC = () => {
 
   const projects = [
     {
+      title: "Smart Home Automation System",
+      description: "Developed an IoT-based smart home automation system using ESP32 microcontrollers and MQTT protocol. Implemented features for remote control of lights, appliances, and security systems through a mobile app. Integrated voice control using Alexa and real-time monitoring with cloud-based data analytics.",
+      image: "/projects/smart-home.jpg",
+      tags: ["IoT", "ESP32", "MQTT", "Cloud Computing", "Mobile App"],
+      github: "https://github.com/KISHOREKUMAR2506/smart-home-automation",
+      pptLink: "/projects/smart-home.pdf",
+      category: "IoT & Automation",
+    },
+    {
       title: "Next-Generation SDN DDoS Mitigation",
       description: "Developed a system to detect and mitigate DDoS attacks using SDN's centralized control. Applied the SVM machine learning algorithm to identify abnormal traffic patterns.",
       image: "/projects/DDoS.jpg",

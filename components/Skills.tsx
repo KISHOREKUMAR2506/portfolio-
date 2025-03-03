@@ -1,6 +1,6 @@
 "use client";
 import { motion } from 'framer-motion';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { FaCloud, FaCode, FaDesktop, FaServer } from 'react-icons/fa';
 import {
   SiC,
@@ -22,6 +22,18 @@ import {
 
 const Skills: FC = () => {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const categories = [
     {
@@ -122,9 +134,9 @@ const Skills: FC = () => {
                 <div className="h-full bg-[#1a1a1a]/30 backdrop-blur-sm rounded-xl overflow-hidden
                   border border-[#4F46E5]/20 group-hover:border-[#4F46E5]/40 
                   transition-all duration-500 relative">
-                  {/* Front Content (Logo) */}
+                  {/* Front Content (Logo) - Hide on mobile */}
                   <motion.div
-                    className="absolute inset-0 flex flex-col items-center justify-center p-8"
+                    className="absolute inset-0 md:flex flex-col items-center justify-center p-8 hidden"
                     animate={{
                       opacity: isHovered ? 0 : 1,
                       scale: isHovered ? 0.8 : 1
@@ -143,13 +155,13 @@ const Skills: FC = () => {
                     <h3 className="text-2xl font-bold text-white">{category.name}</h3>
                   </motion.div>
 
-                  {/* Skills Content (Revealed on Hover) */}
+                  {/* Skills Content (Always visible on mobile, revealed on hover for desktop) */}
                   <motion.div
                     className="absolute inset-0 p-8"
                     initial={{ opacity: 0 }}
                     animate={{
-                      opacity: isHovered ? 1 : 0,
-                      y: isHovered ? 0 : 20
+                      opacity: isHovered || isMobile ? 1 : 0,
+                      y: isHovered || isMobile ? 0 : 20
                     }}
                     transition={{ duration: 0.3 }}
                   >
@@ -166,8 +178,8 @@ const Skills: FC = () => {
                               hover:bg-white/10 transition-colors duration-300"
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ 
-                              opacity: isHovered ? 1 : 0,
-                              x: isHovered ? 0 : -20 
+                              opacity: isHovered || isMobile ? 1 : 0,
+                              x: isHovered || isMobile ? 0 : -20 
                             }}
                             transition={{ delay: index * 0.1 }}
                           >
