@@ -141,7 +141,7 @@ const Hero = () => {
 
         <motion.div className="mt-8 space-y-4">
           <motion.h1 
-            className="hero-title text-5xl md:text-7xl font-bold text-white"
+            className="hero-title text-5xl md:text-7xl font-bold text-white uppercase"
           >
             Kishore Kumar
           </motion.h1>
