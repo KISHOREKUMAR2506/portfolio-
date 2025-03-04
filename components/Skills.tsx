@@ -1,14 +1,13 @@
 "use client";
 import { motion } from 'framer-motion';
 import { FC, useEffect, useState } from 'react';
-import { FaCloud, FaCode, FaDesktop, FaServer } from 'react-icons/fa';
+import { FaCloud, FaCode, FaDesktop, FaJava, FaNetworkWired, FaServer } from 'react-icons/fa';
 import {
   SiC,
   SiDocker,
   SiFlask,
   SiFramer,
   SiGit,
-  SiGithub,
   SiGooglecloud,
   SiJavascript,
   SiMongodb,
@@ -43,14 +42,15 @@ const Skills: FC = () => {
   const categories = [
     {
       id: 'development',
-      name: 'Development',
+      name: 'Programming',
       icon: FaCode,
       color: "#4F46E5",
       skills: [
+        { name: "C", icon: SiC },
         { name: "Python", icon: SiPython },
-        { name: "JavaScript", icon: SiJavascript },
-        { name: "Java", icon: SiJavascript },
-        { name: "C", icon: SiC }
+        { name: "Java", icon: FaJava},
+        { name: "JavaScript", icon: SiJavascript }
+        
       ]
     },
     {
@@ -86,7 +86,7 @@ const Skills: FC = () => {
         { name: "Git", icon: SiGit },
         { name: "Docker", icon: SiDocker },
         { name: "Google Cloud", icon: SiGooglecloud },
-        { name: "GitHub", icon: SiGithub }
+        { name: "Cisco PacketTracer", icon: FaNetworkWired }
       ]
     }
   ];
