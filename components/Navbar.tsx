@@ -32,12 +32,22 @@ const navigationLinks = [
     icon: <RiStackLine className="w-5 h-5" />,
     gradient: "from-[#8B5CF6] to-[#A855F7]"
   },
+
+  // {
+  //   name: "Achievements", 
+  //   href: "achievements", 
+  //   icon: <RiRocketFill className="w-5 h-5" />,
+  //   gradient: "from-[#9333EA] to-[#C084FC]"
+  // },
+
   { 
     name: "Contact", 
     href: "contact", 
     icon: <RiMailLine className="w-5 h-5" />,
     gradient: "from-[#9333EA] to-[#C084FC]"
   }
+  
+
 ] as const;
 
 const Navbar = () => {
@@ -95,12 +105,13 @@ const Navbar = () => {
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
-            <h1 className={`text-3xl font-bold relative ${spaceGrotesk.className} tracking-tight`}>
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#4F46E5] to-[#7C3AED]">K</span>
-              <span className="text-white">ishore</span>{' '}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#484ba4] to-[#4329c3]">K</span>
-              <span className="text-white">umar</span>
-            </h1>
+            <h1 className="text-4xl font-extrabold tracking-wide relative text-outline stylish">
+  <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-white to-white animate-gradient-glow">
+    Kishore Kumar
+  </span>
+</h1>
+
+
           </motion.div>
         </Link>
 

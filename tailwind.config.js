@@ -14,6 +14,17 @@ module.exports = {
       backgroundSize: {
         'grid': '24px 24px',
       },
+
+        theme: {
+          extend: {
+            fontFamily: {
+              stylish: ['Space Grotesk', 'sans-serif'],
+            },
+          },
+        },
+      
+
+
       typography: {
         DEFAULT: {
           css: {

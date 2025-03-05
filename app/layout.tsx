@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { Space_Grotesk } from 'next/font/google';
 import "./globals.css";
 
+
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Kishore Kumar - Portfolio",
+  title: "Kishore Kumar | Portfolio",
   description: "Kishore Kumar's Portfolio",
   icons:{
     icon: "/favicon.png",

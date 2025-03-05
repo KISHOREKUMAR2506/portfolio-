@@ -92,7 +92,7 @@ const Skills: FC = () => {
   ];
 
   return (
-    <section className="relative min-h-screen py-20">
+    <section id ="skills" className="relative min-h-screen py-20">
       <div className="container mx-auto px-4">
         <motion.div className="text-center mb-16">
           <motion.h1 className="text-6xl md:text-8xl font-bold">

@@ -53,7 +53,7 @@ const Projects: FC = () => {
   ]; 
 
   return (
-    <section className="relative min-h-screen py-20 overflow-hidden">
+    <section id ="projects" className="relative min-h-screen py-20 overflow-hidden">
       {/* Enhanced Animated Background */}
       <div className="absolute inset-0 bg-[#090909]">
         <div className="absolute inset-0">

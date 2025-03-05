@@ -22,7 +22,6 @@ const Footer: FC = () => {
       color: 'hover:text-blue-400',
       bgHover: 'hover:bg-blue-900/30'
     },
-   
     {
       name: 'Email',
       url: 'mailto:i.kishorekumar.ece@gmail.com',
@@ -40,7 +39,7 @@ const Footer: FC = () => {
   ];
 
   return (
-    <footer className="relative py-20 mt-32">
+    <footer id ="contact" className="relative py-20 mt-32">
       {/* Top Gradient Divider */}
       <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#4F46E5] to-transparent opacity-20" />
 
