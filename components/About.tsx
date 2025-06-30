@@ -159,7 +159,7 @@ const About: FC = () => {
                   viewport={{ once: true }}
                   transition={{ delay: 0.5 }}
                 >
-                  As a pre-final year Electronics and Communication Engineering student, 
+                  As a final year Electronics and Communication Engineering student, 
                   I am currently learning and exploring IoT, AI-driven networking, and cloud technologies.  
                   Passionate about developing innovative, scalable solutions, I enjoy tackling real-world challenges 
                   and pushing the boundaries of modern applications.

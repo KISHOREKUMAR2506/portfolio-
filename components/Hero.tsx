@@ -103,7 +103,7 @@ const Hero = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
             >
-              AI | IoT | SDN | Cloud | Fullstack
+              IoT | SDN | Cloud | Fullstack
             </motion.p>
             <div className="h-[1px] w-10 bg-blue-600/50" />
           </motion.div>
